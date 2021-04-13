@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-
+import './Clock.css';
 const Clock = (props) => {
 	const [clock, setClock] = useState(0);
 	const [isActive, setIsActive] = useState(false);
@@ -41,20 +41,28 @@ const Clock = (props) => {
 		return `${getHours} : ${getMinutes} : ${getSeconds}`;
 	};
 	return (
-		<div>
-			<div>
-				<div>
+		<div className='clock'>
+			<div className='main'>
+				<div className='timer'>
 					<p>{formatTime()}</p>
 				</div>
-				<div>
+				<div className='timer-buttons'>
 					{!isActive && !isPaused ? (
-						<div onClick={handleStart}>Start</div>
+						<div className='start-button' onClick={handleStart}>
+							<p>Start</p>
+						</div>
 					) : isPaused ? (
-						<div onClick={handlePause}>Pause</div>
+						<div className='start-button' onClick={handlePause}>
+							<p>Pause</p>
+						</div>
 					) : (
-						<div onClick={handleResume}>Resume</div>
+						<div className='start-button' onClick={handleResume}>
+							<p>Resume</p>
+						</div>
 					)}
-					<div onClick={handleReset}>Clear</div>
+					<div className='clear-button' onClick={handleReset}>
+						<p>Clear</p>
+					</div>
 				</div>
 			</div>
 		</div>

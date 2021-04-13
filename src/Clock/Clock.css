@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+.clock {
+	width: 90vw;
+	height: 90vh;
+	display: flex;
+	justify-content: center;
+}
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.timer {
+	border: 3px solid;
+	margin-top: 5vh;
+	height: 50vh;
+	width: 85vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	--angle: 0deg;
+	border-image: linear-gradient(
+			var(--angle),
+			rgb(95, 134, 242),
+			rgb(166, 95, 242),
+			rgb(242, 95, 208),
+			rgb(242, 95, 97),
+			rgb(242, 203, 95),
+			rgb(171, 242, 95),
+			rgb(95, 242, 129),
+			rgb(95, 242, 240)
+		)
+		1;
+	animation: 5s rotateBorder linear infinite;
+}
+@keyframes rotateBorder {
+	to {
+		--angle: 360deg;
+	}
+}
+@property --angle {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: false;
+}
+
+.timer p {
+	font-size: 11vw;
+	word-spacing: -6vw;
+	font-weight: bold;
+	font-family: 'Major Mono Display', monospace;
+	color: white;
+}
+.timer-buttons {
+	margin-top: 5vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 60vw;
+}
+.start-button {
+	border: 2px solid white;
+	font-family: 'Major Mono Display', monospace;
+	width: 25vw;
+	height: 7vw;
+	font-size: 5vw;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.clear-button {
+	border: 2px solid white;
+	font-family: 'Major Mono Display', monospace;
+	width: 25vw;
+	height: 7vw;
+	font-size: 5vw;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.start-button:hover {
+	background-color: rgb(34, 235, 158);
+}
+.clear-button:hover {
+	background-color: rgb(146, 19, 201);
+}

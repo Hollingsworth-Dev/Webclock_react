@@ -1,9 +1,9 @@
 import './App.css';
-import Clock from './Clock/Clock';
+import Ticker from './Clock/Clock';
 function App() {
 	return (
 		<div className='App'>
-			<Clock />
+			<Ticker />
 		</div>
 	);
 }

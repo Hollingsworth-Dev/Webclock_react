@@ -11,11 +11,12 @@
 	justify-content: center;
 	align-items: center;
 }
+
 .timer {
 	border: 3px solid;
 	margin-top: 5vh;
 	height: 50vh;
-	width: 75vw;
+	width: 85vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;

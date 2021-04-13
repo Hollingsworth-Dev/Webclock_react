@@ -1,20 +1,17 @@
 import React, { useEffect, useState, ReactDOM } from 'react';
 
 const Clock = (props) => {
-	const [clock, setClock] = useState();
+	const [clock, setClock] = useState(false);
+	const [start, setStart] = useState('Start');
+
 	return (
 		<div>
-			<div>{props.date.toLocaleTimeString()}</div>
+			<div>
+				<div onClick={() => setClock(true)}>{start}</div>
+				<div>Clear</div>
+			</div>
 		</div>
 	);
 };
 
-const Ticker = () => {
-	return (
-		<div>
-			<Clock date={new Date()} />
-		</div>
-	);
-};
-
-export default Ticker;
+export default Clock;

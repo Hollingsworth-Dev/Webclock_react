@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 .clock {
-	border: 10px solid white;
-	border-radius: 2vw;
 	width: 90vw;
 	height: 90vh;
 	display: flex;
@@ -14,25 +12,37 @@
 	align-items: center;
 }
 .timer {
+	border: 3px solid;
 	margin-top: 5vh;
 	height: 50vh;
 	width: 75vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-width: 3px;
-	border-style: solid;
+	--angle: 0deg;
 	border-image: linear-gradient(
-		60deg,
-		rgb(95, 134, 242),
-		rgb(166, 95, 242),
-		rgb(242, 95, 208),
-		rgb(242, 95, 97),
-		rgb(242, 203, 95),
-		rgb(171, 242, 95),
-		rgb(95, 242, 129),
-		rgb(95, 242, 240)
-	);
+			var(--angle),
+			rgb(95, 134, 242),
+			rgb(166, 95, 242),
+			rgb(242, 95, 208),
+			rgb(242, 95, 97),
+			rgb(242, 203, 95),
+			rgb(171, 242, 95),
+			rgb(95, 242, 129),
+			rgb(95, 242, 240)
+		)
+		1;
+	animation: 5s rotateBorder linear infinite;
+}
+@keyframes rotateBorder {
+	to {
+		--angle: 360deg;
+	}
+}
+@property --angle {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: false;
 }
 
 .timer p {
@@ -60,6 +70,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
 .clear-button {
 	border: 2px solid white;
@@ -71,25 +82,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 }
-
-@keyframes strokeAnimation {
-	0% {
-		-webkit-text-stroke-color: rgb(149, 4, 245);
-	}
-	25% {
-		-webkit-text-stroke-color: rgb(12, 247, 235);
-	}
-	45% {
-		-webkit-text-stroke-color: transparent;
-	}
-	55% {
-		-webkit-text-stroke-color: rgb(16, 250, 199);
-	}
-	85% {
-		-webkit-text-stroke-color: rgb(11, 245, 147);
-	}
-	100% {
-		-webkit-text-stroke-color: rgb(138, 3, 248);
-	}
+.start-button:hover {
+	background-color: rgb(34, 235, 158);
+}
+.clear-button:hover {
+	background-color: rgb(146, 19, 201);
 }

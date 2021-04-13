@@ -48,13 +48,21 @@ const Clock = (props) => {
 				</div>
 				<div className='timer-buttons'>
 					{!isActive && !isPaused ? (
-						<div onClick={handleStart}>Start</div>
+						<div className='start-button' onClick={handleStart}>
+							Start
+						</div>
 					) : isPaused ? (
-						<div onClick={handlePause}>Pause</div>
+						<div className='start-button' onClick={handlePause}>
+							Pause
+						</div>
 					) : (
-						<div onClick={handleResume}>Resume</div>
+						<div className='start-button' onClick={handleResume}>
+							Resume
+						</div>
 					)}
-					<div onClick={handleReset}>Clear</div>
+					<div className='clear-button' onClick={handleReset}>
+						Clear
+					</div>
 				</div>
 			</div>
 		</div>

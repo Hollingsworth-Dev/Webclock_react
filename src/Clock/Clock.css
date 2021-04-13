@@ -3,3 +3,25 @@
 	width: 80vw;
 	height: 80vh;
 }
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.timer {
+	height: 60vh;
+}
+.timer p {
+	text-align: center;
+	margin: 0;
+	margin-top: 12.5vh;
+	font-size: 15vw;
+}
+.timer-buttons {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 40vw;
+}

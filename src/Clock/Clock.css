@@ -17,11 +17,22 @@
 	margin-top: 5vh;
 	height: 50vh;
 	width: 75vw;
-	border: 3px solid white;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-width: 3px;
+	border-style: solid;
+	border-image: linear-gradient(
+		60deg,
+		rgb(95, 134, 242),
+		rgb(166, 95, 242),
+		rgb(242, 95, 208),
+		rgb(242, 95, 97),
+		rgb(242, 203, 95),
+		rgb(171, 242, 95),
+		rgb(95, 242, 129),
+		rgb(95, 242, 240)
+	);
 }
 
 .timer p {
@@ -60,4 +71,25 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+@keyframes strokeAnimation {
+	0% {
+		-webkit-text-stroke-color: rgb(149, 4, 245);
+	}
+	25% {
+		-webkit-text-stroke-color: rgb(12, 247, 235);
+	}
+	45% {
+		-webkit-text-stroke-color: transparent;
+	}
+	55% {
+		-webkit-text-stroke-color: rgb(16, 250, 199);
+	}
+	85% {
+		-webkit-text-stroke-color: rgb(11, 245, 147);
+	}
+	100% {
+		-webkit-text-stroke-color: rgb(138, 3, 248);
+	}
 }

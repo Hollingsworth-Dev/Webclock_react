@@ -4,6 +4,8 @@ const Clock = (props) => {
 	const [clock, setClock] = useState(0);
 	const [isActive, setIsActive] = useState(false);
 	const [isPaused, setIsPaused] = useState(false);
+	const [clockSwitch, setClockSwitch] = useState('Timer');
+	const [showModal, setShowModal] = useState(false);
 	const countRef = useRef(null);
 
 	const handleStart = () => {
@@ -40,6 +42,9 @@ const Clock = (props) => {
 
 		return `${getHours} : ${getMinutes} : ${getSeconds}`;
 	};
+	const handleClockSwitch = () => {
+		handleReset();
+	};
 	return (
 		<div className='clock'>
 			<div className='main'>
@@ -60,11 +65,17 @@ const Clock = (props) => {
 							<p>Resume</p>
 						</div>
 					)}
+					<div className='clock-switch' onClick={handleClockSwitch}>
+						<p>{clockSwitch}</p>
+					</div>
 					<div className='clear-button' onClick={handleReset}>
 						<p>Clear</p>
 					</div>
 				</div>
 			</div>
+			{/* <div>
+				<p>Set your timer</p>
+			</div> */}
 		</div>
 	);
 };

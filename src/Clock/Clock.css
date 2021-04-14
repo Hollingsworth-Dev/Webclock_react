@@ -59,7 +59,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	width: 60vw;
+	width: 85vw;
 }
 .start-button {
 	border: 2px solid white;
@@ -84,6 +84,22 @@
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+}
+.clock-switch {
+	border: 2px solid white;
+	font-family: 'Major Mono Display', monospace;
+	width: 25vw;
+	height: 7vw;
+	font-size: 5vw;
+	color: white;
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.clock-switch:hover {
+	background-color: rgb(243, 34, 73);
 }
 .start-button:hover {
 	background-color: rgb(34, 235, 158);

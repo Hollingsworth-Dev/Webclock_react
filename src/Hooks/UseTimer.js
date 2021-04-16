@@ -1,11 +1,10 @@
 import { useState, useRef } from 'react';
-import { formatTimer } from '../Utils/index';
 
 const UseTimer = (initialState) => {
 	const [clock, setClock] = useState(0);
 	const [isActive, setIsActive] = useState(false);
 	const [isPaused, setIsPaused] = useState(false);
-	const [type, setType] = useState('Timer');
+	const [type, setType] = useState('Stopwatch');
 	const countRef = useRef(null);
 
 	const handleStart = () => {

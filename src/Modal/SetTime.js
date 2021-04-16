@@ -14,6 +14,9 @@ const SetTime = (props) => {
 	};
 	return (
 		<div className='set-time-container'>
+			<div className='form-title'>
+				<h2>Set your Time</h2>
+			</div>
 			<form
 				className='set-time-form'
 				onSubmit={(e) => {
@@ -21,7 +24,7 @@ const SetTime = (props) => {
 				}}>
 				<div className='set-time-inputs'>
 					<div className='set-time-hours'>
-						Hours
+						<p>Hours</p>
 						<input
 							type='number'
 							name='hours'
@@ -29,7 +32,7 @@ const SetTime = (props) => {
 						/>
 					</div>
 					<div className='set-time-minutes'>
-						Minutes
+						<p>Minutes</p>
 						<input
 							type='number'
 							name='minutes'
@@ -37,7 +40,7 @@ const SetTime = (props) => {
 						/>
 					</div>
 					<div className='set-time-seconds'>
-						Seconds
+						<p>Seconds</p>
 						<input
 							type='number'
 							name='seconds'

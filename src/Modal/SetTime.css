@@ -18,7 +18,9 @@
 .set-time-inputs {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	width: 40vw;
+	justify-content: space-evenly;
+	align-items: center;
 }
 .set-time-inputs div {
 	display: flex;
@@ -27,4 +29,12 @@
 }
 .set-time-submit {
 	margin-top: 10vh;
+}
+.set-time-hours .set-time-minutes .set-time-seconds {
+	width: 7vw;
+	height: 3vh;
+}
+input {
+	width: 5vw;
+	height: 2vh;
 }

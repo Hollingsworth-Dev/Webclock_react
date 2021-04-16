@@ -1,40 +1,50 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Clock.css';
-import UseTimer from '../Hook/UseTimer';
-import { formatTimer, formatStopwatch } from '../Utils/index';
 const Clock = (props) => {
-	const [time, setTime] = useState(0);
-	const {
-		clock,
-		setClock,
-		isActive,
-		isPaused,
-		type,
-		setType,
-		handleStart,
-		handlePause,
-		handleResume,
-		handleReset,
-	} = UseTimer();
-	const handleClockSwitch = (clock) => {
-		props.setClockSwitch(clock);
-		handleReset();
+	const [clock, setClock] = useState(0);
+	const [isActive, setIsActive] = useState(false);
+	const [isPaused, setIsPaused] = useState(false);
+	const countRef = useRef(null);
+
+	const handleStart = () => {
+		setIsActive(true);
+		setIsPaused(true);
+		countRef.current = setInterval(() => {
+			setClock((timer) => timer + 1);
+		}, 1000);
 	};
-	const setTheClock = (event) => {
-		event.preventDefault();
-		setClock(time);
+
+	const handlePause = () => {
+		clearInterval(countRef.current);
+		setIsPaused(false);
 	};
-	console.log(time);
+
+	const handleResume = () => {
+		setIsPaused(true);
+		countRef.current = setInterval(() => {
+			setClock((timer) => timer + 1);
+		}, 1000);
+	};
+
+	const handleReset = () => {
+		clearInterval(countRef.current);
+		setIsActive(false);
+		setIsPaused(false);
+		setClock(0);
+	};
+	const formatTime = () => {
+		const getSeconds = `0${clock % 60}`.slice(-2);
+		const minutes = `${Math.floor(clock / 60)}`;
+		const getMinutes = `0${minutes % 60}`.slice(-2);
+		const getHours = `0${Math.floor(clock / 3600)}`.slice(-2);
+
+		return `${getHours} : ${getMinutes} : ${getSeconds}`;
+	};
 	return (
 		<div className='clock'>
 			<div className='main'>
-				<div>
-					<h2>{type}</h2>
-				</div>
 				<div className='timer'>
-					<p>
-						{type === 'stopwatch' ? formatStopwatch(clock) : formatTimer(clock)}
-					</p>
+					<p>{formatTime()}</p>
 				</div>
 				<div className='timer-buttons'>
 					{!isActive && !isPaused ? (
@@ -50,25 +60,10 @@ const Clock = (props) => {
 							<p>Resume</p>
 						</div>
 					)}
-					<div
-						className='clock-switch'
-						onClick={
-							type === 'Timer'
-								? () => setType('Stopwatch')
-								: () => setType('Timer')
-						}>
-						<p>{type === 'Timer' ? 'Stopwatch' : 'Timer'}</p>
-					</div>
 					<div className='clear-button' onClick={handleReset}>
 						<p>Clear</p>
 					</div>
 				</div>
-			</div>
-			<div>
-				<p>Set your timer</p>
-				<form onSubmit={setTheClock}>
-					<input type='number' onChange={(e) => setTime(e.target.value)} />
-				</form>
 			</div>
 		</div>
 	);

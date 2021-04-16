@@ -1,9 +1,9 @@
 import './App.css';
-import Clock from './Clock/Clock';
+import Stopwatch from './Clock/Stopwatch';
 function App() {
 	return (
 		<div className='App'>
-			<Clock />
+			<Stopwatch />
 		</div>
 	);
 }

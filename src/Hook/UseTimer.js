@@ -1,17 +1,29 @@
 import { useState, useRef } from 'react';
+import { formatTimer } from '../Utils/index';
 
-const UseTimer = (initialState = 0) => {
-	const [clock, setClock] = useState(initialState);
+const UseTimer = (initialState) => {
+	const [clock, setClock] = useState(0);
 	const [isActive, setIsActive] = useState(false);
 	const [isPaused, setIsPaused] = useState(false);
+	const [type, setType] = useState('Timer');
 	const countRef = useRef(null);
 
 	const handleStart = () => {
-		setIsActive(true);
-		setIsPaused(true);
-		countRef.current = setInterval(() => {
-			setClock((timer) => timer + 1);
-		}, 1000);
+		if (type === 'Stopwatch') {
+			setIsActive(true);
+			setIsPaused(true);
+			countRef.current = setInterval(() => {
+				setClock((timer) => timer + 1);
+			}, 1000);
+		} else {
+			if (clock > 0) {
+				setIsActive(true);
+				setIsPaused(true);
+				countRef.current = setInterval(() => {
+					setClock((timer) => timer - 1);
+				}, 1000);
+			}
+		}
 	};
 
 	const handlePause = () => {
@@ -21,9 +33,15 @@ const UseTimer = (initialState = 0) => {
 
 	const handleResume = () => {
 		setIsPaused(true);
-		countRef.current = setInterval(() => {
-			setClock((timer) => timer + 1);
-		}, 1000);
+		if (type === 'Stopwatch') {
+			countRef.current = setInterval(() => {
+				setClock((timer) => timer + 1);
+			}, 1000);
+		} else {
+			countRef.current = setInterval(() => {
+				setClock((timer) => timer - 1);
+			}, 1000);
+		}
 	};
 
 	const handleReset = () => {
@@ -32,10 +50,14 @@ const UseTimer = (initialState = 0) => {
 		setIsPaused(false);
 		setClock(0);
 	};
+
 	return {
 		clock,
+		setClock,
 		isActive,
 		isPaused,
+		type,
+		setType,
 		handleStart,
 		handlePause,
 		handleResume,

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Clock.css';
 import UseTimer from '../Hook/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
-const Stopwatch = (props) => {
+const Clock = (props) => {
 	const [time, setTime] = useState(0);
 	const {
 		clock,
@@ -74,4 +74,4 @@ const Stopwatch = (props) => {
 	);
 };
 
-export default Stopwatch;
+export default Clock;

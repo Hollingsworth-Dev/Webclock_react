@@ -1,50 +1,48 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Clock.css';
-const Clock = (props) => {
-	const [clock, setClock] = useState(0);
-	const [isActive, setIsActive] = useState(false);
-	const [isPaused, setIsPaused] = useState(false);
-	const countRef = useRef(null);
-
-	const handleStart = () => {
-		setIsActive(true);
-		setIsPaused(true);
-		countRef.current = setInterval(() => {
-			setClock((timer) => timer + 1);
-		}, 1000);
+import UseTimer from '../Hooks/UseTimer';
+import { formatTimer, formatStopwatch } from '../Utils/index';
+import SetTime from '../Modal/SetTime';
+const Stopwatch = (props) => {
+	const [time, setTime] = useState(0);
+	const [showModal, setShowModal] = useState(false);
+	const {
+		clock,
+		setClock,
+		isActive,
+		isPaused,
+		type,
+		setType,
+		handleStart,
+		handlePause,
+		handleResume,
+		handleReset,
+	} = UseTimer();
+	const handleClockSwitch = (clock) => {
+		props.setClockSwitch(clock);
+		handleReset();
 	};
-
-	const handlePause = () => {
-		clearInterval(countRef.current);
-		setIsPaused(false);
+	const setTheClock = (event) => {
+		event.preventDefault();
+		setClock(time);
 	};
-
-	const handleResume = () => {
-		setIsPaused(true);
-		countRef.current = setInterval(() => {
-			setClock((timer) => timer + 1);
-		}, 1000);
+	const modalHandler = () => {
+		setShowModal(!showModal);
 	};
-
-	const handleReset = () => {
-		clearInterval(countRef.current);
-		setIsActive(false);
-		setIsPaused(false);
-		setClock(0);
-	};
-	const formatTime = () => {
-		const getSeconds = `0${clock % 60}`.slice(-2);
-		const minutes = `${Math.floor(clock / 60)}`;
-		const getMinutes = `0${minutes % 60}`.slice(-2);
-		const getHours = `0${Math.floor(clock / 3600)}`.slice(-2);
-
-		return `${getHours} : ${getMinutes} : ${getSeconds}`;
-	};
+	console.log(time);
 	return (
 		<div className='clock'>
 			<div className='main'>
+				<div className='type-container'>
+					<h2 className='type'>{type}</h2>
+					<div className='setTime-container' onClick={modalHandler}>
+						<h2 className='setTime'>Set Time</h2>
+					</div>
+				</div>
 				<div className='timer'>
-					<p>{formatTime()}</p>
+					<p>
+						{type === 'stopwatch' ? formatStopwatch(clock) : formatTimer(clock)}
+					</p>
 				</div>
 				<div className='timer-buttons'>
 					{!isActive && !isPaused ? (
@@ -60,13 +58,29 @@ const Clock = (props) => {
 							<p>Resume</p>
 						</div>
 					)}
+					<div
+						className='clock-switch'
+						onClick={
+							type === 'Timer'
+								? () => setType('Stopwatch')
+								: () => setType('Timer')
+						}>
+						<p>{type === 'Timer' ? 'Stopwatch' : 'Timer'}</p>
+					</div>
 					<div className='clear-button' onClick={handleReset}>
 						<p>Clear</p>
 					</div>
 				</div>
 			</div>
+			{showModal && <SetTime />}
+			{/* <div>
+				<p>Set your timer</p>
+				<form onSubmit={setTheClock}>
+					<input type='number' onChange={(e) => setTime(e.target.value)} />
+				</form>
+			</div> */}
 		</div>
 	);
 };
 
-export default Clock;
+export default Stopwatch;

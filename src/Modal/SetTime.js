@@ -1,17 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './SetTime.css';
 
-const SetTime = () => {
+const SetTime = (props) => {
+	const [hours, setHours] = useState(0);
+	const [minutes, setMinutes] = useState(0);
+	const [seconds, setSeconds] = useState(0);
+
+	const timeChangeHandler = (event) => {
+		event.preventDefault();
+		let time = hours + minutes + seconds;
+		props.setTheClock(time);
+		props.setShowModal(false);
+	};
 	return (
-		<div>
-			<form>
+		<div className='set-time-container'>
+			<form
+				onSubmit={(e) => {
+					timeChangeHandler(e);
+				}}>
 				<div>
-					Hours<input type='number'></input>
+					Hours
+					<input
+						type='number'
+						name='hours'
+						onChange={(e) => setHours(e.target.value * 3600)}
+					/>
 				</div>
 				<div>
-					Minutes<input></input>
+					Minutes
+					<input
+						type='number'
+						name='minutes'
+						onChange={(e) => setMinutes(e.target.value * 60)}
+					/>
 				</div>
 				<div>
-					Seconds<input></input>
+					Seconds
+					<input
+						type='number'
+						name='seconds'
+						onChange={(e) => setSeconds(e.target.value * 1)}
+					/>
+				</div>
+				<div>
+					<input
+						type='submit'
+						onSubmit={(e) => {
+							timeChangeHandler(e);
+						}}
+						value='Submit'
+					/>
 				</div>
 			</form>
 		</div>

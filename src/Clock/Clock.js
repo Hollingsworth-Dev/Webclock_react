@@ -22,14 +22,12 @@ const Stopwatch = (props) => {
 		props.setClockSwitch(clock);
 		handleReset();
 	};
-	const setTheClock = (event) => {
-		event.preventDefault();
+	const setTheClock = (time) => {
 		setClock(time);
 	};
 	const modalHandler = () => {
 		setShowModal(!showModal);
 	};
-	console.log(time);
 	return (
 		<div className='clock'>
 			<div className='main'>
@@ -72,7 +70,9 @@ const Stopwatch = (props) => {
 					</div>
 				</div>
 			</div>
-			{showModal && <SetTime />}
+			{showModal && (
+				<SetTime setTheClock={setTheClock} setShowModal={setShowModal} />
+			)}
 			{/* <div>
 				<p>Set your timer</p>
 				<form onSubmit={setTheClock}>

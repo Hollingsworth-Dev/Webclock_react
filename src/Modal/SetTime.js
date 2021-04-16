@@ -14,35 +14,41 @@ const SetTime = (props) => {
 	};
 	return (
 		<div className='set-time-container'>
+			<div className='form-title'>
+				<h2>Set your Time</h2>
+			</div>
 			<form
+				className='set-time-form'
 				onSubmit={(e) => {
 					timeChangeHandler(e);
 				}}>
-				<div>
-					Hours
-					<input
-						type='number'
-						name='hours'
-						onChange={(e) => setHours(e.target.value * 3600)}
-					/>
+				<div className='set-time-inputs'>
+					<div className='set-time-hours'>
+						<p>Hours</p>
+						<input
+							type='number'
+							name='hours'
+							onChange={(e) => setHours(e.target.value * 3600)}
+						/>
+					</div>
+					<div className='set-time-minutes'>
+						<p>Minutes</p>
+						<input
+							type='number'
+							name='minutes'
+							onChange={(e) => setMinutes(e.target.value * 60)}
+						/>
+					</div>
+					<div className='set-time-seconds'>
+						<p>Seconds</p>
+						<input
+							type='number'
+							name='seconds'
+							onChange={(e) => setSeconds(e.target.value * 1)}
+						/>
+					</div>
 				</div>
-				<div>
-					Minutes
-					<input
-						type='number'
-						name='minutes'
-						onChange={(e) => setMinutes(e.target.value * 60)}
-					/>
-				</div>
-				<div>
-					Seconds
-					<input
-						type='number'
-						name='seconds'
-						onChange={(e) => setSeconds(e.target.value * 1)}
-					/>
-				</div>
-				<div>
+				<div className='set-time-submit'>
 					<input
 						type='submit'
 						onSubmit={(e) => {

@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './Clock.css';
 import UseTimer from '../Hooks/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
 import SetTime from '../Modal/SetTime';
 const Stopwatch = (props) => {
-	const [time, setTime] = useState(0);
 	const [showModal, setShowModal] = useState(false);
 	const {
 		clock,
@@ -18,10 +17,7 @@ const Stopwatch = (props) => {
 		handleResume,
 		handleReset,
 	} = UseTimer();
-	const handleClockSwitch = (clock) => {
-		props.setClockSwitch(clock);
-		handleReset();
-	};
+
 	const setTheClock = (time) => {
 		setClock(time);
 	};
@@ -33,9 +29,11 @@ const Stopwatch = (props) => {
 			<div className='main'>
 				<div className='type-container'>
 					<h2 className='type'>{type}</h2>
-					<div className='setTime-container' onClick={modalHandler}>
-						<h2 className='setTime'>Set Time</h2>
-					</div>
+					{type === 'Timer' && (
+						<div className='setTime-container' onClick={modalHandler}>
+							<h2 className='setTime'>Set Time</h2>
+						</div>
+					)}
 				</div>
 				<div className='timer'>
 					<p>

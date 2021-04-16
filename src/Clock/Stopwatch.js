@@ -12,10 +12,9 @@ const Stopwatch = (props) => {
 		handleResume,
 		handleReset,
 	} = UseTimer(0);
-	const [clockSwitch, setClockSwitch] = useState('Timer');
-	const [showModal, setShowModal] = useState(false);
 
-	const handleClockSwitch = () => {
+	const handleClockSwitch = (clock) => {
+		props.setClockSwitch(clock);
 		handleReset();
 	};
 	return (
@@ -38,8 +37,10 @@ const Stopwatch = (props) => {
 							<p>Resume</p>
 						</div>
 					)}
-					<div className='clock-switch' onClick={handleClockSwitch}>
-						<p>{clockSwitch}</p>
+					<div
+						className='clock-switch'
+						onClick={() => handleClockSwitch('Stopwatch')}>
+						<p>{props.clockSwitch}</p>
 					</div>
 					<div className='clear-button' onClick={handleReset}>
 						<p>Clear</p>

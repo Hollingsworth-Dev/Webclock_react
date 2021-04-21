@@ -24,6 +24,10 @@ const Stopwatch = (props) => {
 	const modalHandler = () => {
 		setShowModal(!showModal);
 	};
+	const switchClocks = (clock) => {
+		handleReset();
+		setType(clock);
+	};
 	return (
 		<div className='clock'>
 			<div className='main'>
@@ -58,8 +62,8 @@ const Stopwatch = (props) => {
 						className='clock-switch'
 						onClick={
 							type === 'Timer'
-								? () => setType('Stopwatch')
-								: () => setType('Timer')
+								? () => switchClocks('Stopwatch')
+								: () => switchClocks('Timer')
 						}>
 						<p>{type === 'Timer' ? 'Stopwatch' : 'Timer'}</p>
 					</div>

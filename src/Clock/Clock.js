@@ -13,7 +13,8 @@ const Stopwatch = (props) => {
 
 	const [showModal, setShowModal] = useState(false);
 	const [placeholder, setPlaceholder] = useState('00 : 00 : 00');
-	const [restart, setRestart] = useState(true);
+	const [restart, setRestart] = useState(false);
+	const [saveTime, setSaveTime] = useState(0);
 	const {
 		clock,
 		setClock,
@@ -102,6 +103,9 @@ const Stopwatch = (props) => {
 					setTheClock={setTheClock}
 					setShowModal={setShowModal}
 					restart={restart}
+					saveTime={saveTime}
+					setSaveTime={setSaveTime}
+					setRestart={setRestart}
 				/>
 			)}
 			{/* <div>

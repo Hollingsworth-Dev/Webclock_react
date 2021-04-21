@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SetTime.css';
 
 const SetTime = (props) => {
@@ -6,12 +6,27 @@ const SetTime = (props) => {
 	const [minutes, setMinutes] = useState(0);
 	const [seconds, setSeconds] = useState(0);
 
+	useEffect(() => {
+		if (props.restart) {
+			return formatTimer(props.saveTime);
+		}
+	});
+
 	const timeChangeHandler = (event) => {
 		event.preventDefault();
 		let time = hours + minutes + seconds;
-		// props.saveTime(hours);
+		props.setSaveTime(time);
 		props.setTheClock(time);
 		props.setShowModal(false);
+		props.setRestart(true);
+	};
+	const formatTimer = (secs) => {
+		const getHours = `${Math.floor(secs / (60 * 60))}`;
+		const getMinutes = secs % (60 * 60);
+		const minutes = `${Math.floor(getMinutes / 60)}`;
+		const getSeconds = getMinutes % 60;
+		const seconds = `${Math.ceil(getSeconds)}`;
+		return [setHours(getHours), setMinutes(minutes), setSeconds(seconds)];
 	};
 	return (
 		<div className='set-time-container'>
@@ -29,7 +44,8 @@ const SetTime = (props) => {
 						<input
 							type='number'
 							name='hours'
-							value={hours}
+							value={props.restart ? hours : hours / 3600}
+							min={0}
 							onChange={(e) => setHours(e.target.value * 3600)}
 						/>
 					</div>
@@ -37,17 +53,18 @@ const SetTime = (props) => {
 						<p>Minutes</p>
 						<input
 							type='number'
+							min={0}
+							value={props.restart ? minutes : minutes / 60}
 							name='minutes'
-							value={minutes}
 							onChange={(e) => setMinutes(e.target.value * 60)}
 						/>
 					</div>
 					<div className='set-time-seconds'>
 						<p>Seconds</p>
 						<input
-							value={seconds}
 							type='number'
 							name='seconds'
+							min={0}
 							onChange={(e) => setSeconds(e.target.value * 1)}
 						/>
 					</div>

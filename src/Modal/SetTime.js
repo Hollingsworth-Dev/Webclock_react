@@ -9,13 +9,14 @@ const SetTime = (props) => {
 	const timeChangeHandler = (event) => {
 		event.preventDefault();
 		let time = hours + minutes + seconds;
+		// props.saveTime(hours);
 		props.setTheClock(time);
 		props.setShowModal(false);
 	};
 	return (
 		<div className='set-time-container'>
 			<div className='form-title'>
-				<h2>Set your Time</h2>
+				<h2>{props.restart ? 'Restart with same Time?' : 'Set your Time'}</h2>
 			</div>
 			<form
 				className='set-time-form'
@@ -28,6 +29,7 @@ const SetTime = (props) => {
 						<input
 							type='number'
 							name='hours'
+							value={hours}
 							onChange={(e) => setHours(e.target.value * 3600)}
 						/>
 					</div>
@@ -36,12 +38,14 @@ const SetTime = (props) => {
 						<input
 							type='number'
 							name='minutes'
+							value={minutes}
 							onChange={(e) => setMinutes(e.target.value * 60)}
 						/>
 					</div>
 					<div className='set-time-seconds'>
 						<p>Seconds</p>
 						<input
+							value={seconds}
 							type='number'
 							name='seconds'
 							onChange={(e) => setSeconds(e.target.value * 1)}
@@ -54,8 +58,17 @@ const SetTime = (props) => {
 						onSubmit={(e) => {
 							timeChangeHandler(e);
 						}}
-						value='Submit'
+						value={props.restart ? 'Yes' : 'Submit'}
 					/>
+					{props.restart && (
+						<input
+							type='submit'
+							onSubmit={(e) => {
+								timeChangeHandler(e);
+							}}
+							value='No'
+						/>
+					)}
 				</div>
 			</form>
 		</div>

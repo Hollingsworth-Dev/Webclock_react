@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Clock.css';
 import UseTimer from '../Hooks/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
 import SetTime from '../Modal/SetTime';
 const Stopwatch = (props) => {
+	useEffect(() => {
+		if (clock === -1) {
+			timeIsUp();
+		}
+		console.log(clock);
+	});
+
 	const [showModal, setShowModal] = useState(false);
+	const [placeholder, setPlaceholder] = useState('00 : 00 : 00');
+	const [restart, setRestart] = useState(true);
 	const {
 		clock,
 		setClock,
@@ -28,6 +37,17 @@ const Stopwatch = (props) => {
 		handleReset();
 		setType(clock);
 	};
+	const timeIsUp = () => {
+		setPlaceholder("Time's Up!");
+		handleReset();
+		setTimeout(() => {
+			setShowModal(true);
+		}, 2000);
+	};
+	const handleTheStart = () => {
+		handleStart();
+	};
+
 	return (
 		<div className='clock'>
 			<div className='main'>
@@ -40,13 +60,18 @@ const Stopwatch = (props) => {
 					)}
 				</div>
 				<div className='timer'>
-					<p>
-						{type === 'stopwatch' ? formatStopwatch(clock) : formatTimer(clock)}
-					</p>
+					{clock > 0 && (
+						<p>
+							{type === 'stopwatch'
+								? formatStopwatch(clock)
+								: formatTimer(clock)}
+						</p>
+					)}
+					{clock <= 0 && <p>{placeholder}</p>}
 				</div>
 				<div className='timer-buttons'>
 					{!isActive && !isPaused ? (
-						<div className='start-button' onClick={handleStart}>
+						<div className='start-button' onClick={handleTheStart}>
 							<p>Start</p>
 						</div>
 					) : isPaused ? (
@@ -73,7 +98,11 @@ const Stopwatch = (props) => {
 				</div>
 			</div>
 			{showModal && (
-				<SetTime setTheClock={setTheClock} setShowModal={setShowModal} />
+				<SetTime
+					setTheClock={setTheClock}
+					setShowModal={setShowModal}
+					restart={restart}
+				/>
 			)}
 			{/* <div>
 				<p>Set your timer</p>

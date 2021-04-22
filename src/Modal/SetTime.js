@@ -20,6 +20,23 @@ const SetTime = (props) => {
 		props.setShowModal(false);
 		props.setRestart(true);
 	};
+	const setTimeHandler = (event) => {
+		if (props.restart) {
+			props.setRestart(false);
+			setHours(0);
+			setMinutes(0);
+			setSeconds(0);
+		}
+		if (event.target.name === 'hours') {
+			setHours(event.target.value * 3600);
+		}
+		if (event.target.name === 'minutes') {
+			setMinutes(event.target.value * 60);
+		}
+		if (event.target.name === 'seconds') {
+			setSeconds(event.target.value * 1);
+		}
+	};
 	const formatTimer = (secs) => {
 		const getHours = `${Math.floor(secs / (60 * 60))}`;
 		const getMinutes = secs % (60 * 60);
@@ -46,7 +63,7 @@ const SetTime = (props) => {
 							name='hours'
 							value={props.restart ? hours : hours / 3600}
 							min={0}
-							onChange={(e) => setHours(e.target.value * 3600)}
+							onChange={(e) => setTimeHandler(e)}
 						/>
 					</div>
 					<div className='set-time-minutes'>
@@ -56,7 +73,7 @@ const SetTime = (props) => {
 							min={0}
 							value={props.restart ? minutes : minutes / 60}
 							name='minutes'
-							onChange={(e) => setMinutes(e.target.value * 60)}
+							onChange={(e) => setTimeHandler(e)}
 						/>
 					</div>
 					<div className='set-time-seconds'>
@@ -65,7 +82,8 @@ const SetTime = (props) => {
 							type='number'
 							name='seconds'
 							min={0}
-							onChange={(e) => setSeconds(e.target.value * 1)}
+							value={seconds}
+							onChange={(e) => setTimeHandler(e)}
 						/>
 					</div>
 				</div>

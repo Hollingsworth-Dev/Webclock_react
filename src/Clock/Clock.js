@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Clock.css';
 import UseTimer from '../Hooks/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
 import SetTime from '../Modal/SetTime';
+
 const Stopwatch = (props) => {
 	useEffect(() => {
 		if (clock === -1) {
 			timeIsUp();
 		}
-		console.log(clock);
 	});
 
 	const [showModal, setShowModal] = useState(false);
 	const [placeholder, setPlaceholder] = useState('00 : 00 : 00');
 	const [restart, setRestart] = useState(false);
 	const [saveTime, setSaveTime] = useState(0);
+
 	const {
 		clock,
 		setClock,
@@ -43,10 +44,15 @@ const Stopwatch = (props) => {
 		handleReset();
 		setTimeout(() => {
 			setShowModal(true);
+			setPlaceholder('00 : 00 : 00');
 		}, 2000);
 	};
 	const handleTheStart = () => {
 		handleStart();
+	};
+	const handleTheClear = () => {
+		handleReset();
+		setPlaceholder('00 : 00 : 00');
 	};
 
 	return (
@@ -93,7 +99,7 @@ const Stopwatch = (props) => {
 						}>
 						<p>{type === 'Timer' ? 'Stopwatch' : 'Timer'}</p>
 					</div>
-					<div className='clear-button' onClick={handleReset}>
+					<div className='clear-button' onClick={handleTheClear}>
 						<p>Clear</p>
 					</div>
 				</div>

@@ -1,5 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './SetTime.css';
+function useOnClickOutside(ref, handler) {
+	useEffect(
+		() => {
+			const listener = (event) => {
+				// Do nothing if clicking ref's element or descendent elements
+				if (!ref.current || ref.current.contains(event.target)) {
+					return;
+				}
+				handler(event);
+			};
+			document.addEventListener('mousedown', listener);
+			document.addEventListener('touchstart', listener);
+			return () => {
+				document.removeEventListener('mousedown', listener);
+				document.removeEventListener('touchstart', listener);
+			};
+		},
+		// Add ref and handler to effect dependencies
+		// It's worth noting that because passed in handler is a new ...
+		// ... function on every render that will cause this effect ...
+		// ... callback/cleanup to run every render. It's not a big deal ...
+		// ... but to optimize you can wrap handler in useCallback before ...
+		// ... passing it into this hook.
+		[ref, handler]
+	);
+}
 
 const SetTime = (props) => {
 	const [hours, setHours] = useState(0);
@@ -11,6 +37,8 @@ const SetTime = (props) => {
 			return formatTimer(props.saveTime);
 		}
 	});
+	const modalRef = useRef();
+	useOnClickOutside(modalRef, () => props.setShowModal(false));
 
 	const timeChangeHandler = (event) => {
 		event.preventDefault();
@@ -22,10 +50,7 @@ const SetTime = (props) => {
 	};
 	const setTimeHandler = (event) => {
 		if (props.restart) {
-			props.setRestart(false);
-			setHours(0);
-			setMinutes(0);
-			setSeconds(0);
+			resetRestart();
 		}
 		if (event.target.name === 'hours') {
 			setHours(event.target.value * 3600);
@@ -45,8 +70,14 @@ const SetTime = (props) => {
 		const seconds = `${Math.ceil(getSeconds)}`;
 		return [setHours(getHours), setMinutes(minutes), setSeconds(seconds)];
 	};
+	const resetRestart = (event) => {
+		props.setRestart(false);
+		setHours(0);
+		setMinutes(0);
+		setSeconds(0);
+	};
 	return (
-		<div className='set-time-container'>
+		<div className='set-time-container' ref={modalRef}>
 			<div className='form-title'>
 				<h2>{props.restart ? 'Restart with same Time?' : 'Set your Time'}</h2>
 			</div>
@@ -98,8 +129,8 @@ const SetTime = (props) => {
 					{props.restart && (
 						<input
 							type='submit'
-							onSubmit={(e) => {
-								timeChangeHandler(e);
+							onClick={() => {
+								resetRestart();
 							}}
 							value='No'
 						/>

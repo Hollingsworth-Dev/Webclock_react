@@ -13,6 +13,9 @@ export const formatTimer = (secs) => {
 	const minutes = `0${Math.floor(getMinutes / 60)}`.slice(-2);
 	const getSeconds = getMinutes % 60;
 	const seconds = `0${Math.ceil(getSeconds)}`.slice(-2);
-
-	return `${getHours} : ${minutes} : ${seconds}`;
+	if (secs > 0) {
+		return `${getHours} : ${minutes} : ${seconds}`;
+	} else {
+		return "Time's up!";
+	}
 };

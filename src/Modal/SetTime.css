@@ -33,41 +33,43 @@
 }
 .set-time-submit {
 	margin-top: 10vh;
+	display: flex;
+	justify-content: space-evenly;
+	width: 70vw;
 }
 .set-time-hours {
 	display: flex;
 	width: 20vw;
 	height: 14vh;
-
 	align-items: center;
 }
 .set-time-minutes {
 	display: flex;
 	width: 20vw;
 	height: 14vh;
-
 	align-items: center;
 }
 .set-time-seconds {
 	display: flex;
 	width: 20vw;
 	height: 14vh;
-
 	align-items: center;
 }
 input {
 	width: 7vw;
 	height: 7vh;
 	font-family: 'Major Mono Display', monospace;
-	font-size: 2em;
+	font-size: 3vw;
 	background-color: black;
 	color: white;
 	border: none;
 	outline: none;
 }
+.set-time-submit {
+}
 .set-time-inputs p {
 	font-family: 'Major Mono Display', monospace;
-	font-size: 2em;
+	font-size: 3vw;
 	color: white;
 }
 .set-time-submit input {
@@ -75,7 +77,7 @@ input {
 	width: 16vw;
 	font-family: 'Major Mono Display', monospace;
 	background-color: white;
-	font-size: 2em;
+	font-size: 3vw;
 	color: black;
 }
 .set-time-submit input:hover {
@@ -85,9 +87,32 @@ input {
 }
 .form-title {
 	margin-bottom: -10vh;
+	text-align: center;
 }
 .form-title h2 {
 	font-family: 'Major Mono Display', monospace;
-	font-size: 4em;
+	font-size: 4vw;
 	color: white;
 }
+/* .restart-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+	height: 80vh;
+}
+.restart-buttons {
+	display: flex;
+	justify-content: space-evenly;
+	width: 50vw;
+}
+.restart-title p {
+	font-family: 'Major Mono Display', monospace;
+	font-size: 4vw;
+	color: white;
+}
+.restart-buttons div {
+	font-family: 'Major Mono Display', monospace;
+	font-size: 5vw;
+	color: white;
+} */

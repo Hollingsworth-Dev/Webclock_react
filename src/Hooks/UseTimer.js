@@ -5,6 +5,7 @@ const UseTimer = (initialState) => {
 	const [isActive, setIsActive] = useState(false);
 	const [isPaused, setIsPaused] = useState(false);
 	const [type, setType] = useState('Stopwatch');
+
 	const countRef = useRef(null);
 
 	const handleStart = () => {

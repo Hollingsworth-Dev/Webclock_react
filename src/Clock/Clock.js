@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Clock.css';
 import UseTimer from '../Hooks/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
 import SetTime from '../Modal/SetTime';
+
 const Stopwatch = (props) => {
+	useEffect(() => {
+		if (clock === -1) {
+			timeIsUp();
+		}
+	});
+
 	const [showModal, setShowModal] = useState(false);
+	const [placeholder, setPlaceholder] = useState('00 : 00 : 00');
+	const [restart, setRestart] = useState(false);
+	const [saveTime, setSaveTime] = useState(0);
+
 	const {
 		clock,
 		setClock,
@@ -24,6 +35,26 @@ const Stopwatch = (props) => {
 	const modalHandler = () => {
 		setShowModal(!showModal);
 	};
+	const switchClocks = (clock) => {
+		handleReset();
+		setType(clock);
+	};
+	const timeIsUp = () => {
+		setPlaceholder("Time's Up!");
+		handleReset();
+		setTimeout(() => {
+			setShowModal(true);
+			setPlaceholder('00 : 00 : 00');
+		}, 2000);
+	};
+	const handleTheStart = () => {
+		handleStart();
+	};
+	const handleTheClear = () => {
+		handleReset();
+		setPlaceholder('00 : 00 : 00');
+	};
+
 	return (
 		<div className='clock'>
 			<div className='main'>
@@ -36,13 +67,18 @@ const Stopwatch = (props) => {
 					)}
 				</div>
 				<div className='timer'>
-					<p>
-						{type === 'stopwatch' ? formatStopwatch(clock) : formatTimer(clock)}
-					</p>
+					{clock > 0 && (
+						<p>
+							{type === 'stopwatch'
+								? formatStopwatch(clock)
+								: formatTimer(clock)}
+						</p>
+					)}
+					{clock <= 0 && <p>{placeholder}</p>}
 				</div>
 				<div className='timer-buttons'>
 					{!isActive && !isPaused ? (
-						<div className='start-button' onClick={handleStart}>
+						<div className='start-button' onClick={handleTheStart}>
 							<p>Start</p>
 						</div>
 					) : isPaused ? (
@@ -58,18 +94,25 @@ const Stopwatch = (props) => {
 						className='clock-switch'
 						onClick={
 							type === 'Timer'
-								? () => setType('Stopwatch')
-								: () => setType('Timer')
+								? () => switchClocks('Stopwatch')
+								: () => switchClocks('Timer')
 						}>
 						<p>{type === 'Timer' ? 'Stopwatch' : 'Timer'}</p>
 					</div>
-					<div className='clear-button' onClick={handleReset}>
+					<div className='clear-button' onClick={handleTheClear}>
 						<p>Clear</p>
 					</div>
 				</div>
 			</div>
 			{showModal && (
-				<SetTime setTheClock={setTheClock} setShowModal={setShowModal} />
+				<SetTime
+					setTheClock={setTheClock}
+					setShowModal={setShowModal}
+					restart={restart}
+					saveTime={saveTime}
+					setSaveTime={setSaveTime}
+					setRestart={setRestart}
+				/>
 			)}
 			{/* <div>
 				<p>Set your timer</p>

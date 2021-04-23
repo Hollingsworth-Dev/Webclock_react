@@ -33,7 +33,13 @@
 			rgb(95, 242, 240)
 		)
 		1;
+	-webkit-animation: 5s rotateBorder linear infinite;
 	animation: 5s rotateBorder linear infinite;
+}
+@-webkit-keyframes rotateBorder {
+	to {
+		--angle: 360deg;
+	}
 }
 @keyframes rotateBorder {
 	to {

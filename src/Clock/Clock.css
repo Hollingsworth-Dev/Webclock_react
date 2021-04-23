@@ -20,7 +20,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	--angle: 0deg;
+	--angle: 60deg;
 	border-image: linear-gradient(
 			var(--angle),
 			rgb(95, 134, 242),
@@ -36,8 +36,14 @@
 	animation: 5s rotateBorder linear infinite;
 }
 @keyframes rotateBorder {
-	to {
-		--angle: 360deg;
+	0% {
+		--angle: 60deg;
+	}
+	50% {
+		--angle: 210deg;
+	}
+	100% {
+		--angle: 420deg;
 	}
 }
 @property --angle {

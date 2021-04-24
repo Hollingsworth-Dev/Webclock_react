@@ -41,10 +41,18 @@ const SetTime = (props) => {
 	useOnClickOutside(modalRef, () => props.setShowModal(false));
 
 	const timeChangeHandler = (event) => {
+		console.log(hours, minutes, seconds);
 		event.preventDefault();
 		let time = hours + minutes + seconds;
 		props.setSaveTime(time);
 		props.setTheClock(time);
+		props.setShowModal(false);
+		props.setRestart(true);
+	};
+	const restartTimeChangeHandler = (event) => {
+		event.preventDefault();
+		props.setSaveTime(props.saveTime);
+		props.setTheClock(props.saveTime);
 		props.setShowModal(false);
 		props.setRestart(true);
 	};
@@ -84,7 +92,7 @@ const SetTime = (props) => {
 			<form
 				className='set-time-form'
 				onSubmit={(e) => {
-					timeChangeHandler(e);
+					props.restart ? restartTimeChangeHandler(e) : timeChangeHandler(e);
 				}}>
 				<div className='set-time-inputs'>
 					<div className='set-time-hours'>
@@ -92,7 +100,7 @@ const SetTime = (props) => {
 						<input
 							type='number'
 							name='hours'
-							value={props.restart ? hours : hours / 3600}
+							placeholder={props.restart ? hours : hours / 3600}
 							min={0}
 							onChange={(e) => setTimeHandler(e)}
 						/>
@@ -102,7 +110,7 @@ const SetTime = (props) => {
 						<input
 							type='number'
 							min={0}
-							value={props.restart ? minutes : minutes / 60}
+							placeholder={props.restart ? minutes : minutes / 60}
 							name='minutes'
 							onChange={(e) => setTimeHandler(e)}
 						/>
@@ -113,7 +121,7 @@ const SetTime = (props) => {
 							type='number'
 							name='seconds'
 							min={0}
-							value={seconds}
+							placeholder={props.restart ? seconds : seconds}
 							onChange={(e) => setTimeHandler(e)}
 						/>
 					</div>
@@ -122,7 +130,9 @@ const SetTime = (props) => {
 					<input
 						type='submit'
 						onSubmit={(e) => {
-							timeChangeHandler(e);
+							props.restart
+								? restartTimeChangeHandler(e)
+								: timeChangeHandler(e);
 						}}
 						value={props.restart ? 'Yes' : 'Submit'}
 					/>

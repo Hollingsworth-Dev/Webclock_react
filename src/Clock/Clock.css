@@ -52,6 +52,7 @@
 		--angle: 420deg;
 	}
 }
+
 @property --angle {
 	syntax: '<angle>';
 	initial-value: 0deg;

@@ -37,8 +37,14 @@
 	animation: 5s rotateBorder linear infinite;
 }
 @-webkit-keyframes rotateBorder {
-	to {
-		--angle: 360deg;
+	0% {
+		--angle: 60deg;
+	}
+	50% {
+		--angle: 210deg;
+	}
+	100% {
+		--angle: 420deg;
 	}
 }
 @keyframes rotateBorder {

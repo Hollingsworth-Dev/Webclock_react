@@ -26,6 +26,9 @@
 	justify-content: space-evenly;
 	align-items: center;
 }
+.set-time-inputs input {
+	background-color: rgba(18, 17, 17, 0.221);
+}
 .set-time-inputs div {
 	display: flex;
 	flex-direction: column;
@@ -65,8 +68,7 @@ input {
 	border: none;
 	outline: none;
 }
-.set-time-submit {
-}
+
 .set-time-inputs p {
 	font-family: 'Major Mono Display', monospace;
 	font-size: 3vw;
@@ -93,6 +95,24 @@ input {
 	font-family: 'Major Mono Display', monospace;
 	font-size: 4vw;
 	color: white;
+}
+@media only screen and (max-width: 800px) {
+	.form-title h2 {
+		font-family: 'Major Mono Display', monospace;
+		font-size: 10vw;
+		color: white;
+	}
+	.set-time-inputs p {
+		font-family: 'Major Mono Display', monospace;
+		font-size: 4vw;
+		color: white;
+	}
+	.set-time-inputs input {
+		width: 15vw;
+	}
+	.set-time-submit input {
+		width: 20vw;
+	}
 }
 /* .restart-container {
 	display: flex;

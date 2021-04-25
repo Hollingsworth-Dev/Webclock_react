@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Clock.css';
 import UseTimer from '../Hooks/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
@@ -114,12 +114,6 @@ const Stopwatch = (props) => {
 					setRestart={setRestart}
 				/>
 			)}
-			{/* <div>
-				<p>Set your timer</p>
-				<form onSubmit={setTheClock}>
-					<input type='number' onChange={(e) => setTime(e.target.value)} />
-				</form>
-			</div> */}
 		</div>
 	);
 };

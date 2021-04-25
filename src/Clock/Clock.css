@@ -37,8 +37,14 @@
 	animation: 5s rotateBorder linear infinite;
 }
 @-webkit-keyframes rotateBorder {
-	to {
-		--angle: 360deg;
+	0% {
+		--angle: 60deg;
+	}
+	50% {
+		--angle: 210deg;
+	}
+	100% {
+		--angle: 420deg;
 	}
 }
 @keyframes rotateBorder {
@@ -153,4 +159,35 @@
 }
 .setTime:hover {
 	color: black;
+}
+
+@media only screen and (max-width: 800px) {
+	.start-button {
+		width: 20vw;
+		height: 15vh;
+		padding: 2vw;
+	}
+	.clock-switch {
+		width: 30vw;
+		height: 15vh;
+		padding: 2vw;
+	}
+	.clear-button {
+		width: 20vw;
+		height: 15vh;
+		padding: 2vw;
+	}
+	.type {
+		font-size: 10vw;
+	}
+	.type-container {
+		width: 80vw;
+	}
+	.setTime-container {
+		width: 30vw;
+		height: 5vh;
+	}
+	.setTime {
+		font-size: 5vw;
+	}
 }

@@ -41,7 +41,6 @@ const SetTime = (props) => {
 	useOnClickOutside(modalRef, () => props.setShowModal(false));
 
 	const timeChangeHandler = (event) => {
-		console.log(hours, minutes, seconds);
 		event.preventDefault();
 		let time = hours + minutes + seconds;
 		props.setSaveTime(time);

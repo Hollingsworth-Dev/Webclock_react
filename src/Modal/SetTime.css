@@ -7,7 +7,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 2px solid black;
+	border: 2px solid white;
 	align-self: center;
 }
 .set-time-form {
@@ -28,6 +28,7 @@
 }
 .set-time-inputs input {
 	background-color: rgba(18, 17, 17, 0.221);
+	border: 1px solid white;
 }
 .set-time-inputs div {
 	display: flex;

@@ -160,6 +160,35 @@
 .setTime:hover {
 	color: black;
 }
+.stop-alarm {
+	border: 2px solid white;
+	font-family: 'Major Mono Display', monospace;
+	width: 50vw;
+	height: 7vw;
+	font-size: 5vw;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	animation: stopAlarm 1s infinite;
+}
+.stop-alarm:hover {
+	cursor: pointer;
+	background-color: rgb(243, 34, 73);
+	animation: none;
+}
+@keyframes stopAlarm {
+	0% {
+		background-color: transparent;
+	}
+	50% {
+		background-color: rgb(243, 34, 73);
+	}
+	100% {
+		background-color: transparent;
+	}
+}
 
 @media only screen and (max-width: 800px) {
 	.start-button {

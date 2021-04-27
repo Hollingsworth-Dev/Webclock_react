@@ -4,6 +4,20 @@ import UseTimer from '../Hooks/UseTimer';
 import { formatTimer, formatStopwatch } from '../Utils/index';
 import SetTime from '../Modal/SetTime';
 
+const soundUrl = new Audio(
+	'https://mytimesounds.s3.amazonaws.com/myTimeSynthAlarm.m4a'
+);
+
+//creating a loop for the audio file
+soundUrl.addEventListener(
+	'ended',
+	function () {
+		soundUrl.currentTime = 0;
+		soundUrl.play();
+	},
+	false
+);
+
 const Stopwatch = (props) => {
 	useEffect(() => {
 		if (clock === -1) {
@@ -15,6 +29,7 @@ const Stopwatch = (props) => {
 	const [placeholder, setPlaceholder] = useState('00 : 00 : 00');
 	const [restart, setRestart] = useState(false);
 	const [saveTime, setSaveTime] = useState(0);
+	const [playAlarm, setPlayAlarm] = useState(false);
 
 	const {
 		clock,
@@ -40,7 +55,15 @@ const Stopwatch = (props) => {
 		setType(clock);
 	};
 	const timeIsUp = () => {
+		soundUrl.play();
+
 		setPlaceholder("Time's Up!");
+		setPlayAlarm(true);
+	};
+	const stopAlarm = () => {
+		setPlayAlarm(false);
+		soundUrl.pause();
+		soundUrl.currentTime = 0;
 		handleReset();
 		setTimeout(() => {
 			setShowModal(true);
@@ -59,8 +82,13 @@ const Stopwatch = (props) => {
 		<div className='clock'>
 			<div className='main'>
 				<div className='type-container'>
-					<h2 className='type'>{type}</h2>
-					{type === 'Timer' && (
+					{!playAlarm && <h2 className='type'>{type}</h2>}
+					{playAlarm && (
+						<div className='stop-alarm' onClick={() => stopAlarm()}>
+							<p>Stop Alarm</p>
+						</div>
+					)}
+					{type === 'Timer' && !playAlarm && (
 						<div className='setTime-container' onClick={modalHandler}>
 							<h2 className='setTime'>Set Time</h2>
 						</div>
@@ -112,6 +140,8 @@ const Stopwatch = (props) => {
 					saveTime={saveTime}
 					setSaveTime={setSaveTime}
 					setRestart={setRestart}
+					playAlarm={playAlarm}
+					setPlayAlarm={setPlayAlarm}
 				/>
 			)}
 		</div>
